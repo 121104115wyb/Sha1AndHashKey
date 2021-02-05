@@ -1,0 +1,23 @@
+一。release 版本的哈希sha1获取
+
+1.找到jdk安装路径中的bin文件夹（一般路径在C:\Program Files\Java\jdk1.8.0_231\bin）
+2.执行如下命令：
+keytool -list -v -keystore C:\wyb\dev\dchome-android\conf\dchome.jks
+其中keystore  后面跟的是您的签名文件的路径；
+3.输入您的签名文件的密码即可；
+
+二。debug版本的哈希获取
+
+as右侧gradle->app->tasks->android->signingReport 点击即可
+
+二.开发和发布的密钥散列
+
+1.首先我们需要安装openssl工具，安装过的略过；
+在这个项目中有安装包打开即可安装(轻量级和重量级两个版本)；
+2.安装完成后，我们执行如下命令；
+keytool -exportcert -alias YOUR_RELEASE_KEY_ALIAS -keystore YOUR_RELEASE_KEY_PATH | openssl sha1 -binary | openssl base64
+
+YOUR_RELEASE_KEY_ALIAS  ：您的密钥别名
+YOUR_RELEASE_KEY_PATH ：您的签名路径
+
+facebook详细说明：https://developers.facebook.com/quickstarts/474369439895396/?platform=android
